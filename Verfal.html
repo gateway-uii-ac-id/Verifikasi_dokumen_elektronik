@@ -12,16 +12,14 @@
 body{
 font-family:Arial, Helvetica, sans-serif;
 margin:0;
-background:#f4f6fb;
+background:linear-gradient(180deg,#eef2f9,#f7f8fc);
 }
 
-/* HEADER */
-
 .header{
-background:#0b4da2;
+background:#1f4fa3;
 color:white;
-padding:12px 20px;
-font-weight:bold;
+padding:14px 24px;
+font-weight:600;
 }
 
 .header span{
@@ -29,91 +27,86 @@ float:right;
 font-size:13px;
 }
 
-/* CONTAINER */
-
 .container{
-width:650px;
-max-width:90%;
+width:680px;
+max-width:92%;
 margin:60px auto;
 background:white;
 padding:35px;
-border-radius:6px;
-box-shadow:0 2px 12px rgba(0,0,0,0.12);
+border-radius:10px;
+box-shadow:0 6px 25px rgba(0,0,0,0.08);
 text-align:center;
 }
 
-/* LOGO */
-
 .logo{
 width:110px;
-margin-bottom:10px;
+margin-bottom:15px;
 }
 
-/* INPUT */
+.card{
+background:white;
+border-radius:10px;
+padding:20px;
+box-shadow:0 3px 15px rgba(0,0,0,0.06);
+margin-top:20px;
+}
 
 input{
 width:90%;
 padding:12px;
 margin:10px;
 border:1px solid #ccc;
-border-radius:5px;
+border-radius:6px;
 font-size:15px;
 }
 
-/* BUTTON */
-
 button{
-background:#0b4da2;
+background:#1f4fa3;
 color:white;
 border:none;
-padding:12px 25px;
-border-radius:5px;
+padding:12px 26px;
+border-radius:6px;
 cursor:pointer;
 }
 
 button:hover{
-background:#083a7a;
+background:#163a79;
 }
-
-/* TABLE */
 
 table{
 width:100%;
 border-collapse:collapse;
-margin-top:20px;
+margin-top:15px;
+text-align:left;
 }
 
 td{
-border:1px solid #ddd;
+border-bottom:1px solid #eee;
 padding:10px;
-text-align:left;
 font-size:14px;
 }
 
 .section{
-background:#f2f2f2;
-font-weight:bold;
+background:#f4f6fb;
+font-weight:600;
 }
 
 .valid{
-color:green;
-font-weight:bold;
+background:#e6f7ec;
+color:#1a7f37;
+padding:6px 12px;
+border-radius:5px;
+font-weight:600;
+display:inline-block;
 }
-
-/* PAGE TRANSITION */
 
 .page{
 display:none;
-opacity:0;
-transition:opacity .4s ease;
 }
 
 .page.active{
 display:block;
-opacity:1;
 }
-
-/* LOADING SCREEN */
 
 #loading{
 position:fixed;
@@ -131,7 +124,7 @@ z-index:999;
 width:55px;
 height:55px;
 border:6px solid #eee;
-border-top:6px solid #0b4da2;
+border-top:6px solid #1f4fa3;
 border-radius:50%;
 animation:spin 1s linear infinite;
 }
@@ -141,65 +134,23 @@ animation:spin 1s linear infinite;
 100%{transform:rotate(360deg)}
 }
 
-/* VERIFY LOADING */
-
-#verifyLoading{
-display:none;
-position:fixed;
-width:100%;
-height:100%;
-background:rgba(255,255,255,0.95);
-top:0;
-left:0;
-z-index:1000;
-align-items:center;
-justify-content:center;
-flex-direction:column;
-}
-
-/* FOOTER */
-
-.footer{
-text-align:center;
-margin-top:20px;
-font-size:13px;
-color:#777;
-}
-
 </style>
 
 </head>
 
 <body>
 
-<!-- LOADING AWAL -->
-
 <div id="loading">
-
 <div class="spinner"></div>
 <p>Memuat Sistem Verifikasi...</p>
-
 </div>
-
-<!-- LOADING VERIFIKASI -->
-
-<div id="verifyLoading">
-
-<div class="spinner"></div>
-<p>Sedang memverifikasi dokumen...</p>
-
-</div>
-
-<!-- HEADER -->
 
 <div class="header">
-
 verifikasi.uii.ac.id
 <span>Sistem Verifikasi Dokumen</span>
-
 </div>
 
-<!-- HALAMAN PENCARIAN -->
+<!-- PAGE 1 -->
 
 <div class="container page active" id="page1">
 
@@ -208,10 +159,10 @@ verifikasi.uii.ac.id
 <h2>VERIFIKASI DOKUMEN ELEKTRONIK</h2>
 <h3>UNIVERSITAS ISLAM INDONESIA</h3>
 
-<p>Silakan masukkan identitas untuk melakukan verifikasi dokumen elektronik.</p>
+<p>Masukkan identitas untuk melakukan verifikasi dokumen akademik.</p>
 
-<input type="text" id="nama" placeholder="Masukkan Nama">
-<input type="text" id="nim" placeholder="Masukkan NIM">
+<input type="text" placeholder="Masukkan Nama">
+<input type="text" placeholder="Masukkan NIM">
 
 <br><br>
 
@@ -219,13 +170,15 @@ verifikasi.uii.ac.id
 
 </div>
 
-<!-- HALAMAN HASIL -->
+<!-- PAGE 2 -->
 
 <div class="container page" id="page2">
 
 <img src="logo-uii.png" class="logo">
 
-<h2>HASIL VERIFIKASI DOKUMEN</h2>
+<h2>HASIL VERIFIKASI</h2>
+
+<div class="card">
 
 <table>
 
@@ -235,42 +188,27 @@ verifikasi.uii.ac.id
 
 <tr>
 <td>Nama Lengkap</td>
-<td id="v_nama"></td>
+<td>Muhammad Agil</td>
 </tr>
 
 <tr>
 <td>NIM</td>
-<td id="v_nim"></td>
-</tr>
-
-<tr>
-<td>Nomor Induk Kependudukan</td>
-<td>347112XXXXXXXX</td>
+<td>23313164</td>
 </tr>
 
 <tr>
 <td>Tempat / Tanggal Lahir</td>
-<td>Yogyakarta, 12 Mei 1997</td>
-</tr>
-
-<tr>
-<td>Jenis Kelamin</td>
-<td>Laki-laki</td>
-</tr>
-
-<tr>
-<td>Kewarganegaraan</td>
-<td>Indonesia</td>
+<td>Bojonegoro, 05 Juni 2002</td>
 </tr>
 
 <tr>
 <td>Program Studi</td>
-<td id="v_prodi"></td>
+<td>Magister Manajemen</td>
 </tr>
 
 <tr>
 <td>Fakultas</td>
-<td id="v_fakultas"></td>
+<td>Fakultas Bisnis dan Ekonomika</td>
 </tr>
 
 <tr>
@@ -284,19 +222,17 @@ verifikasi.uii.ac.id
 </tr>
 
 <tr>
-<td>Tahun Masuk</td>
-<td>2022</td>
-</tr>
-
-<tr>
-<td>Tahun Lulus</td>
-<td>2024</td>
-</tr>
-
-<tr>
 <td>IPK</td>
-<td>3.87</td>
+<td>3.79</td>
 </tr>
+
+</table>
+
+</div>
+
+<div class="card">
+
+<table>
 
 <tr class="section">
 <td colspan="2">Data Dokumen</td>
@@ -304,11 +240,54 @@ verifikasi.uii.ac.id
 
 <tr>
 <td>Nomor Ijazah</td>
+<td>95/UII-S2/MM/3/87172/2025</td>
+</tr>
+
+<tr>
+<td>Nomor Seri Nasional</td>
+<td>MM/3/87172/2025</td>
+</tr>
+
+<tr>
+<td>Status Dokumen</td>
+<td class="valid">VALID</td>
+</tr>
+
+<tr>
+<td>Tanggal Verifikasi</td>
+<td id="tanggal"></td>
+</tr>
+
+</table>
+
+</div>
+
+<br>
+
+<button onclick="detail()">Lihat Detail Dokumen</button>
+<button onclick="kembali()">Kembali</button>
+
+</div>
+
+<!-- PAGE 3 -->
+
+<div class="container page" id="page3">
+
+<img src="logo-uii.png" class="logo">
+
+<h2>DETAIL DOKUMEN AKADEMIK</h2>
+
+<div class="card">
+
+<table>
+
+<tr>
+<td>Nomor Ijazah</td>
 <td>UII/MM/2024/001245</td>
 </tr>
 
 <tr>
-<td>Nomor Seri Ijazah Nasional</td>
+<td>Nomor Seri Nasional</td>
 <td>NSIN-2024-8849201</td>
 </tr>
 
@@ -333,113 +312,49 @@ verifikasi.uii.ac.id
 </tr>
 
 <tr>
-<td>Akreditasi Program Studi</td>
-<td>Unggul (BAN-PT)</td>
-</tr>
-
-<tr>
-<td>Status Dokumen</td>
-<td class="valid">VALID</td>
-</tr>
-
-<tr>
-<td>Tanggal Verifikasi</td>
-<td id="v_tanggal"></td>
+<td>Status Verifikasi</td>
+<td class="valid">TERVERIFIKASI</td>
 </tr>
 
 </table>
 
-<br>
-
-<button onclick="kembali()">Kembali</button>
-
 </div>
 
-<div class="footer">
-© Universitas Islam Indonesia
+<br>
+
+<button onclick="kembali2()">Kembali</button>
+
 </div>
 
 <script>
 
-/* DATABASE SIMULASI */
-
-let db={
-
-"20240001":{
-nama:"Riang Sunyi",
-prodi:"Magister Manajemen",
-fakultas:"Fakultas Bisnis dan Ekonomika"
-},
-
-"20240002":{
-nama:"Ahmad Fauzi",
-prodi:"Teknik Informatika",
-fakultas:"Fakultas Teknologi Industri"
-}
-
-};
-
-/* LOADING AWAL */
-
 window.onload=function(){
-
 setTimeout(function(){
-
 document.getElementById("loading").style.display="none";
-
 },1500);
-
-};
-
-/* VERIFIKASI */
+}
 
 function verifikasi(){
-
-let nama=document.getElementById("nama").value;
-let nim=document.getElementById("nim").value;
-
-let data=db[nim];
-
-if(!data){
-
-alert("Data tidak ditemukan");
-
-return;
-
-}
-
-/* tampilkan loading verifikasi */
-
-document.getElementById("verifyLoading").style.display="flex";
-
-setTimeout(function(){
-
-document.getElementById("verifyLoading").style.display="none";
-
-document.getElementById("v_nama").innerHTML=data.nama;
-document.getElementById("v_nim").innerHTML=nim;
-document.getElementById("v_prodi").innerHTML=data.prodi;
-document.getElementById("v_fakultas").innerHTML=data.fakultas;
-
-let tgl=new Date();
-document.getElementById("v_tanggal").innerHTML=tgl.toLocaleDateString("id-ID");
-
-/* transisi halaman */
-
 document.getElementById("page1").classList.remove("active");
 document.getElementById("page2").classList.add("active");
 
-},2000);
-
+let tgl=new Date();
+document.getElementById("tanggal").innerHTML=tgl.toLocaleDateString("id-ID");
 }
 
-/* KEMBALI */
-
 function kembali(){
-
 document.getElementById("page2").classList.remove("active");
 document.getElementById("page1").classList.add("active");
+}
 
+function detail(){
+document.getElementById("page2").classList.remove("active");
+document.getElementById("page3").classList.add("active");
+}
+
+function kembali2(){
+document.getElementById("page3").classList.remove("active");
+document.getElementById("page2").classList.add("active");
 }
 
 </script>
