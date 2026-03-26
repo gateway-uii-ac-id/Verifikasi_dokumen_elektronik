@@ -1,64 +1,52 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Verifikasi Dokumen Elektronik UII</title>
+<title>Verifikasi Dokumen Elektronik - Universitas Islam Indonesia</title>
 
 <style>
 
 body{
-font-family: Arial, sans-serif;
-background:#f5f5f5;
+font-family:Arial, Helvetica, sans-serif;
 margin:0;
-padding:0;
-text-align:center;
+background:#f4f6fb;
 }
 
 /* HEADER */
 
 .header{
-background:#1976d2;
+background:#0b4da2;
 color:white;
-padding:12px;
-font-size:18px;
+padding:12px 20px;
+font-weight:bold;
 }
 
 .header span{
-font-weight:bold;
+float:right;
+font-size:13px;
 }
 
 /* CONTAINER */
 
 .container{
-background:white;
-max-width:500px;
+width:650px;
 margin:60px auto;
-padding:30px;
-border-radius:8px;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
+background:white;
+padding:35px;
+border-radius:6px;
+box-shadow:0 2px 12px rgba(0,0,0,0.12);
+text-align:center;
 }
 
 /* LOGO */
 
 .logo{
 width:110px;
-margin-bottom:15px;
-}
-
-/* TITLE */
-
-h1{
-font-size:22px;
-margin:5px;
-}
-
-h2{
-font-size:18px;
-font-weight:normal;
-margin-bottom:25px;
+margin-bottom:10px;
 }
 
 /* INPUT */
@@ -66,65 +54,95 @@ margin-bottom:25px;
 input{
 width:90%;
 padding:12px;
-margin:10px 0;
+margin:10px;
 border:1px solid #ccc;
 border-radius:5px;
-font-size:16px;
+font-size:15px;
 }
 
 /* BUTTON */
 
 button{
-background:#1976d2;
+background:#0b4da2;
 color:white;
 border:none;
-padding:12px 30px;
-font-size:16px;
+padding:12px 25px;
 border-radius:5px;
 cursor:pointer;
-margin-top:15px;
 }
 
 button:hover{
-background:#0d5cb6;
+background:#083a7a;
 }
 
-/* RESULT */
+/* TABLE */
 
-#result{
+table{
+width:100%;
+border-collapse:collapse;
 margin-top:20px;
-font-size:18px;
+}
+
+td{
+border:1px solid #ddd;
+padding:10px;
+text-align:left;
+font-size:14px;
+}
+
+.section{
+background:#f2f2f2;
 font-weight:bold;
 }
 
-/* LOADING SCREEN */
+.valid{
+color:green;
+font-weight:bold;
+}
+
+/* LOADING */
 
 #loading{
 position:fixed;
 width:100%;
 height:100%;
 background:white;
-top:0;
-left:0;
 display:flex;
-justify-content:center;
 align-items:center;
+justify-content:center;
 flex-direction:column;
-z-index:9999;
+z-index:999;
 }
 
 .spinner{
+width:55px;
+height:55px;
 border:6px solid #eee;
-border-top:6px solid #1976d2;
+border-top:6px solid #0b4da2;
 border-radius:50%;
-width:50px;
-height:50px;
 animation:spin 1s linear infinite;
 }
 
 @keyframes spin{
-0%{transform:rotate(0deg);}
-100%{transform:rotate(360deg);}
+0%{transform:rotate(0)}
+100%{transform:rotate(360deg)}
+}
+
+/* PAGE */
+
+.page{
+display:none;
+}
+
+.active{
+display:block;
+}
+
+.footer{
+text-align:center;
+margin-top:20px;
+font-size:13px;
+color:#777;
 }
 
 </style>
@@ -133,78 +151,215 @@ animation:spin 1s linear infinite;
 
 <body>
 
-<!-- LOADING SCREEN -->
+<!-- LOADING -->
 
 <div id="loading">
+
 <div class="spinner"></div>
 <p>Memuat Sistem Verifikasi...</p>
+
 </div>
 
 <!-- HEADER -->
 
 <div class="header">
-<span>verifikasi.uii.ac.id</span>
+
+verifikasi.uii.ac.id
+<span>Sistem Verifikasi Dokumen</span>
+
 </div>
 
-<!-- CONTENT -->
+<!-- HALAMAN PENCARIAN -->
 
-<div class="container">
+<div class="container page active" id="page1">
 
 <img src="logo-uii.png" class="logo">
 
-<h1>VERIFIKASI DOKUMEN ELEKTRONIK</h1>
-<h2>UNIVERSITAS ISLAM INDONESIA</h2>
+<h2>VERIFIKASI DOKUMEN ELEKTRONIK</h2>
+<h3>UNIVERSITAS ISLAM INDONESIA</h3>
+
+<p>Silakan masukkan identitas untuk melakukan verifikasi dokumen elektronik.</p>
 
 <input type="text" id="nama" placeholder="Masukkan Nama">
 
-<br>
-
 <input type="text" id="nim" placeholder="Masukkan NIM">
 
+<br><br>
+
+<button onclick="verifikasi()">Cari Dokumen</button>
+
+</div>
+
+<!-- HALAMAN HASIL -->
+
+<div class="container page" id="page2">
+
+<img src="logo-uii.png" class="logo">
+
+<h2>HASIL VERIFIKASI DOKUMEN</h2>
+
+<table>
+
+<tr class="section">
+<td colspan="2">Identitas Mahasiswa</td>
+</tr>
+
+<tr>
+<td>Nama Lengkap</td>
+<td id="v_nama"></td>
+</tr>
+
+<tr>
+<td>NIM</td>
+<td id="v_nim"></td>
+</tr>
+
+<tr>
+<td>Tempat / Tanggal Lahir</td>
+<td>Yogyakarta, 12 Mei 1997</td>
+</tr>
+
+<tr>
+<td>Program Studi</td>
+<td id="v_prodi"></td>
+</tr>
+
+<tr>
+<td>Fakultas</td>
+<td id="v_fakultas"></td>
+</tr>
+
+<tr>
+<td>Jenjang Pendidikan</td>
+<td>Magister (S2)</td>
+</tr>
+
+<tr>
+<td>Tahun Masuk</td>
+<td>2022</td>
+</tr>
+
+<tr>
+<td>Tahun Lulus</td>
+<td>2024</td>
+</tr>
+
+<tr>
+<td>IPK</td>
+<td>3.87</td>
+</tr>
+
+<tr class="section">
+<td colspan="2">Data Dokumen</td>
+</tr>
+
+<tr>
+<td>Nomor Ijazah</td>
+<td>UII/MM/2024/001245</td>
+</tr>
+
+<tr>
+<td>Tanggal Kelulusan</td>
+<td>28 September 2024</td>
+</tr>
+
+<tr>
+<td>Status Dokumen</td>
+<td class="valid">VALID</td>
+</tr>
+
+<tr>
+<td>Tanggal Verifikasi</td>
+<td id="v_tanggal"></td>
+</tr>
+
+</table>
+
 <br>
 
-<button onclick="verifikasi()">Cari / Tampilkan</button>
+<button onclick="kembali()">Kembali</button>
 
-<div id="result"></div>
+</div>
+
+<div class="footer">
+
+© Universitas Islam Indonesia
 
 </div>
 
 <script>
 
-/* Loading screen */
+/* DATABASE */
 
-window.onload = function(){
-setTimeout(function(){
-document.getElementById("loading").style.display="none";
-},1500);
+let db={
+
+"20240001":{
+nama:"Riang Sunyi",
+prodi:"Magister Manajemen",
+fakultas:"Fakultas Bisnis dan Ekonomika"
+},
+
+"20240002":{
+nama:"Ahmad Fauzi",
+prodi:"Teknik Informatika",
+fakultas:"Fakultas Teknologi Industri"
 }
 
-/* Verifikasi */
+};
+
+/* LOADING */
+
+window.onload=function(){
+
+setTimeout(function(){
+
+document.getElementById("loading").style.display="none";
+
+},1500);
+
+};
+
+/* VERIFIKASI */
 
 function verifikasi(){
 
 let nama=document.getElementById("nama").value;
 let nim=document.getElementById("nim").value;
 
-if(nama=="" || nim==""){
-document.getElementById("result").innerHTML="Data belum lengkap";
+let data=db[nim];
+
+if(!data){
+
+alert("Data tidak ditemukan");
+
 return;
+
 }
 
-/* simulasi database */
+document.getElementById("v_nama").innerHTML=data.nama;
+document.getElementById("v_nim").innerHTML=nim;
+document.getElementById("v_prodi").innerHTML=data.prodi;
+document.getElementById("v_fakultas").innerHTML=data.fakultas;
 
-if(nim=="20240001"){
-document.getElementById("result").innerHTML=
-"Dokumen ditemukan atas nama <br><b>"+nama+"</b>";
+let tgl=new Date();
+
+document.getElementById("v_tanggal").innerHTML=tgl.toLocaleDateString("id-ID");
+
+document.getElementById("page1").classList.remove("active");
+document.getElementById("page2").classList.add("active");
+
 }
-else{
-document.getElementById("result").innerHTML=
-"Data tidak ditemukan";
-}
+
+/* KEMBALI */
+
+function kembali(){
+
+document.getElementById("page2").classList.remove("active");
+document.getElementById("page1").classList.add("active");
 
 }
 
 </script>
 
 </body>
-  </html>
+</html>
