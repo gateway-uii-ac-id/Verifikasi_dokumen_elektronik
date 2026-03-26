@@ -7,6 +7,9 @@
 
 <title>Verifikasi Dokumen Elektronik - Universitas Islam Indonesia</title>
 
+<meta name="description" content="Sistem Verifikasi Dokumen Akademik Universitas Islam Indonesia">
+<meta name="keywords" content="verifikasi ijazah UII, verifikasi dokumen elektronik, universitas islam indonesia, cek ijazah uii, validasi ijazah, sistem verifikasi akademik, GPTA, gepta, verifikasi dokumen digital">
+
 <style>
 
 body{
@@ -25,6 +28,7 @@ font-weight:600;
 .header span{
 float:right;
 font-size:13px;
+opacity:0.9;
 }
 
 .container{
@@ -36,6 +40,12 @@ padding:35px;
 border-radius:10px;
 box-shadow:0 6px 25px rgba(0,0,0,0.08);
 text-align:center;
+animation:fade 0.5s ease;
+}
+
+@keyframes fade{
+from{opacity:0; transform:translateY(10px);}
+to{opacity:1; transform:translateY(0);}
 }
 
 .logo{
@@ -49,6 +59,7 @@ border-radius:10px;
 padding:20px;
 box-shadow:0 3px 15px rgba(0,0,0,0.06);
 margin-top:20px;
+border-left:4px solid #1f4fa3;
 }
 
 input{
@@ -67,6 +78,7 @@ border:none;
 padding:12px 26px;
 border-radius:6px;
 cursor:pointer;
+margin:5px;
 }
 
 button:hover{
@@ -120,6 +132,18 @@ flex-direction:column;
 z-index:999;
 }
 
+#loadingData{
+position:fixed;
+width:100%;
+height:100%;
+background:rgba(255,255,255,0.95);
+display:none;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+z-index:999;
+}
+
 .spinner{
 width:55px;
 height:55px;
@@ -134,20 +158,37 @@ animation:spin 1s linear infinite;
 100%{transform:rotate(360deg)}
 }
 
+.footer{
+margin-top:50px;
+font-size:12px;
+color:#666;
+text-align:center;
+line-height:1.6;
+}
+
 </style>
 
 </head>
 
 <body>
 
+<!-- Loading awal -->
+
 <div id="loading">
 <div class="spinner"></div>
 <p>Memuat Sistem Verifikasi...</p>
 </div>
 
+<!-- Loading data -->
+
+<div id="loadingData">
+<div class="spinner"></div>
+<p>Memuat Data Mahasiswa...</p>
+</div>
+
 <div class="header">
 verifikasi.uii.ac.id
-<span>Sistem Verifikasi Dokumen</span>
+<span>Sistem Verifikasi Dokumen Akademik</span>
 </div>
 
 <!-- PAGE 1 -->
@@ -161,8 +202,8 @@ verifikasi.uii.ac.id
 
 <p>Masukkan identitas untuk melakukan verifikasi dokumen akademik.</p>
 
-<input type="text" placeholder="Masukkan Nama">
-<input type="text" placeholder="Masukkan NIM">
+<input type="text" placeholder="Masukkan Nama Lengkap">
+<input type="text" placeholder="Masukkan NIM Mahasiswa">
 
 <br><br>
 
@@ -188,7 +229,7 @@ verifikasi.uii.ac.id
 
 <tr>
 <td>Nama Lengkap</td>
-<td>Muhammad Agil</td>
+<td><b>Muhammad Agil</b></td>
 </tr>
 
 <tr>
@@ -235,7 +276,7 @@ verifikasi.uii.ac.id
 <table>
 
 <tr class="section">
-<td colspan="2">Data Dokumen</td>
+<td colspan="2">Data Dokumen Akademik</td>
 </tr>
 
 <tr>
@@ -326,6 +367,20 @@ verifikasi.uii.ac.id
 
 </div>
 
+<div class="footer">
+
+© 2026 Universitas Islam Indonesia  
+Direktorat Sistem Informasi & Transformasi Digital  
+
+Sistem Verifikasi Dokumen Akademik Elektronik  
+Digunakan untuk memvalidasi keaslian ijazah dan dokumen akademik resmi Universitas Islam Indonesia.
+
+Jl. Kaliurang Km 14.5, Sleman, Yogyakarta 55584  
+Telp: (0274) 898444  
+Website: www.uii.ac.id
+
+</div>
+
 <script>
 
 window.onload=function(){
@@ -335,11 +390,20 @@ document.getElementById("loading").style.display="none";
 }
 
 function verifikasi(){
+
+document.getElementById("loadingData").style.display="flex";
+
+setTimeout(function(){
+
+document.getElementById("loadingData").style.display="none";
 document.getElementById("page1").classList.remove("active");
 document.getElementById("page2").classList.add("active");
 
 let tgl=new Date();
 document.getElementById("tanggal").innerHTML=tgl.toLocaleDateString("id-ID");
+
+},1500);
+
 }
 
 function kembali(){
