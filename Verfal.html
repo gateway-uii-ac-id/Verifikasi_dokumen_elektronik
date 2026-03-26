@@ -7,12 +7,8 @@
 
 <title>Verifikasi Dokumen Elektronik - Universitas Islam Indonesia</title>
 
-<meta name="description" content="Sistem resmi verifikasi dokumen akademik Universitas Islam Indonesia">
-<meta name="keywords" content="verifikasi ijazah UII, cek ijazah UII, verifikasi dokumen elektronik, Universitas Islam Indonesia, validasi ijazah, sistem akademik, GPTA, gepta, verifikasi ijazah digital">
-
-<meta property="og:title" content="Verifikasi Dokumen Elektronik - Universitas Islam Indonesia">
-<meta property="og:description" content="Sistem resmi verifikasi dokumen akademik Universitas Islam Indonesia">
-<meta property="og:type" content="website">
+<meta name="description" content="Sistem verifikasi dokumen akademik Universitas Islam Indonesia">
+<meta name="keywords" content="verifikasi ijazah UII, cek ijazah UII, verifikasi dokumen elektronik, universitas islam indonesia, validasi ijazah, GPTA, gepta">
 
 <link rel="icon" href="favicon-uii.png">
 
@@ -21,101 +17,89 @@
 body{
 font-family:Arial, Helvetica, sans-serif;
 margin:0;
-background:linear-gradient(180deg,#eef2f9,#f7f8fc);
+background:#f5f7fb;
 }
 
 .header{
 background:#1f4fa3;
 color:white;
-padding:14px 24px;
+padding:14px 22px;
 font-weight:600;
-}
-
-.header span{
-float:right;
-font-size:13px;
-opacity:0.9;
+font-size:14px;
 }
 
 .container{
-width:680px;
+width:650px;
 max-width:92%;
-margin:60px auto;
+margin:70px auto;
 background:white;
-padding:35px;
+padding:40px;
 border-radius:10px;
-box-shadow:0 6px 25px rgba(0,0,0,0.08);
+box-shadow:0 5px 20px rgba(0,0,0,0.06);
 text-align:center;
-animation:fade 0.4s ease;
-}
-
-@keyframes fade{
-from{opacity:0; transform:translateY(10px);}
-to{opacity:1; transform:translateY(0);}
 }
 
 .logo{
-width:110px;
+width:105px;
 margin-bottom:15px;
 }
 
 .card{
 background:white;
-border-radius:10px;
-padding:20px;
-box-shadow:0 3px 15px rgba(0,0,0,0.06);
+border-radius:8px;
+padding:18px;
 margin-top:20px;
-border-left:4px solid #1f4fa3;
+border:1px solid #eee;
+}
+
+.search-box{
+margin-top:20px;
 }
 
 input{
 width:90%;
 padding:12px;
-margin:10px;
-border:1px solid #ccc;
+margin:8px;
+border:1px solid #ddd;
 border-radius:6px;
-font-size:15px;
+font-size:14px;
 }
 
 button{
 background:#1f4fa3;
 color:white;
 border:none;
-padding:12px 26px;
+padding:12px 24px;
 border-radius:6px;
 cursor:pointer;
-margin:6px;
+margin-top:10px;
 }
 
 button:hover{
-background:#163a79;
+background:#183f86;
 }
 
 table{
 width:100%;
 border-collapse:collapse;
-margin-top:15px;
+margin-top:10px;
 text-align:left;
 }
 
 td{
 border-bottom:1px solid #eee;
-padding:10px;
+padding:9px;
 font-size:14px;
 }
 
 .section{
-background:#f4f6fb;
+background:#f6f8fc;
 font-weight:600;
 }
 
 .valid{
-background:#e6f7ec;
 color:#1a7f37;
-padding:6px 12px;
-border-radius:5px;
 font-weight:600;
-display:inline-block;
 }
 
 .page{
@@ -142,7 +126,7 @@ z-index:999;
 position:fixed;
 width:100%;
 height:100%;
-background:rgba(255,255,255,0.95);
+background:white;
 display:none;
 align-items:center;
 justify-content:center;
@@ -151,10 +135,10 @@ z-index:999;
 }
 
 .spinner{
-width:55px;
-height:55px;
-border:6px solid #eee;
-border-top:6px solid #1f4fa3;
+width:50px;
+height:50px;
+border:5px solid #eee;
+border-top:5px solid #1f4fa3;
 border-radius:50%;
 animation:spin 1s linear infinite;
 }
@@ -165,11 +149,10 @@ animation:spin 1s linear infinite;
 }
 
 .footer{
-margin-top:50px;
+margin-top:45px;
 font-size:12px;
-color:#666;
+color:#777;
 text-align:center;
-line-height:1.7;
 }
 
 </style>
@@ -180,17 +163,16 @@ line-height:1.7;
 
 <div id="loading">
 <div class="spinner"></div>
-<p>Memuat Sistem Verifikasi...</p>
+<p>Memuat sistem...</p>
 </div>
 
 <div id="loadingData">
 <div class="spinner"></div>
-<p>Memuat Data Mahasiswa...</p>
+<p>Memuat data mahasiswa...</p>
 </div>
 
 <div class="header">
 verifikasi.uii.ac.id
-<span>Sistem Verifikasi Dokumen Akademik</span>
 </div>
 
 <!-- PAGE 1 -->
@@ -199,17 +181,24 @@ verifikasi.uii.ac.id
 
 <img src="logo-uii.png" class="logo">
 
-<h2>VERIFIKASI DOKUMEN ELEKTRONIK</h2>
-<h3>UNIVERSITAS ISLAM INDONESIA</h3>
+<h2>Verifikasi Dokumen Elektronik</h2>
+<p>Universitas Islam Indonesia</p>
 
-<p>Masukkan identitas untuk melakukan verifikasi dokumen akademik.</p>
+<div class="search-box">
 
-<input type="text" id="nama" placeholder="Masukkan Nama Lengkap">
-<input type="text" id="nim" placeholder="Masukkan NIM Mahasiswa">
+<label style="font-size:13px;color:#666;">
+Masukkan Nama atau Nomor Induk Mahasiswa
+</label>
 
-<br><br>
+<br>
+
+<input type="text" id="keyword" placeholder="Nama / NIM">
+
+<br>
 
 <button onclick="verifikasi()">Cari Dokumen</button>
+
+</div>
 
 </div>
 
@@ -219,7 +208,7 @@ verifikasi.uii.ac.id
 
 <img src="logo-uii.png" class="logo">
 
-<h2>HASIL VERIFIKASI</h2>
+<h2>Hasil Verifikasi</h2>
 
 <div class="card">
 
@@ -230,18 +219,13 @@ verifikasi.uii.ac.id
 </tr>
 
 <tr>
-<td>Nama Lengkap</td>
+<td>Nama</td>
 <td><b>Muhammad Agil</b></td>
 </tr>
 
 <tr>
 <td>NIM</td>
 <td>23313164</td>
-</tr>
-
-<tr>
-<td>Tempat / Tanggal Lahir</td>
-<td>Bojonegoro, 05 Juni 2002</td>
 </tr>
 
 <tr>
@@ -255,12 +239,12 @@ verifikasi.uii.ac.id
 </tr>
 
 <tr>
-<td>Jenjang Pendidikan</td>
+<td>Jenjang</td>
 <td>Magister (S2)</td>
 </tr>
 
 <tr>
-<td>Status Mahasiswa</td>
+<td>Status</td>
 <td>Lulus</td>
 </tr>
 
@@ -278,7 +262,7 @@ verifikasi.uii.ac.id
 <table>
 
 <tr class="section">
-<td colspan="2">Data Dokumen Akademik</td>
+<td colspan="2">Data Ijazah</td>
 </tr>
 
 <tr>
@@ -292,22 +276,12 @@ verifikasi.uii.ac.id
 </tr>
 
 <tr>
-<td>Status Akreditasi</td>
-<td>Unggul (BAN-PT)</td>
-</tr>
-
-<tr>
-<td>Pejabat Penandatangan</td>
-<td>Rektor Universitas Islam Indonesia</td>
-</tr>
-
-<tr>
-<td>Status Dokumen</td>
+<td>Status</td>
 <td class="valid">VALID</td>
 </tr>
 
 <tr>
-<td>Tanggal Verifikasi</td>
+<td>Waktu Verifikasi</td>
 <td id="tanggal"></td>
 </tr>
 
@@ -317,81 +291,14 @@ verifikasi.uii.ac.id
 
 <br>
 
-<button onclick="detail()">Lihat Detail Dokumen</button>
 <button onclick="kembali()">Kembali</button>
-
-</div>
-
-<!-- PAGE 3 -->
-
-<div class="container page" id="page3">
-
-<img src="logo-uii.png" class="logo">
-
-<h2>DETAIL DOKUMEN AKADEMIK</h2>
-
-<div class="card">
-
-<table>
-
-<tr>
-<td>Nomor Ijazah</td>
-<td>UII/MM/2024/001245</td>
-</tr>
-
-<tr>
-<td>Nomor Seri Nasional</td>
-<td>NSIN-2024-8849201</td>
-</tr>
-
-<tr>
-<td>Nomor SK Yudisium</td>
-<td>SK/UII/MM/IX/2024/115</td>
-</tr>
-
-<tr>
-<td>Tanggal Yudisium</td>
-<td>20 September 2024</td>
-</tr>
-
-<tr>
-<td>Tanggal Penerbitan Ijazah</td>
-<td>30 September 2024</td>
-</tr>
-
-<tr>
-<td>Perguruan Tinggi</td>
-<td>Universitas Islam Indonesia</td>
-</tr>
-
-<tr>
-<td>Status Verifikasi</td>
-<td class="valid">TERVERIFIKASI</td>
-</tr>
-
-</table>
-
-</div>
-
-<br>
-
-<button onclick="kembali2()">Kembali</button>
 
 </div>
 
 <div class="footer">
 
 © 2026 Universitas Islam Indonesia  
-Direktorat Sistem Informasi dan Transformasi Digital  
-
-Sistem Verifikasi Dokumen Akademik Elektronik  
-
-Versi Sistem : 2.4.1  
-Build Sistem : 2026.03  
-
-Jl. Kaliurang Km 14.5 Sleman Yogyakarta 55584  
-Telp : (0274) 898444  
-Website : www.uii.ac.id
+Sistem Verifikasi Dokumen Akademik
 
 </div>
 
@@ -400,16 +307,15 @@ Website : www.uii.ac.id
 window.onload=function(){
 setTimeout(function(){
 document.getElementById("loading").style.display="none";
-},1500);
+},1200);
 }
 
 function verifikasi(){
 
-let nama=document.getElementById("nama").value;
-let nim=document.getElementById("nim").value;
+let keyword=document.getElementById("keyword").value;
 
-if(nama=="" || nim==""){
-alert("Silakan isi Nama dan NIM terlebih dahulu");
+if(keyword==""){
+alert("Silakan masukkan Nama atau NIM terlebih dahulu");
 return;
 }
 
@@ -424,7 +330,7 @@ document.getElementById("page2").classList.add("active");
 let tgl=new Date();
 document.getElementById("tanggal").innerHTML=tgl.toLocaleString("id-ID");
 
-},1500);
+},1400);
 
 }
 
@@ -433,17 +339,7 @@ document.getElementById("page2").classList.remove("active");
 document.getElementById("page1").classList.add("active");
 }
 
-function detail(){
-document.getElementById("page2").classList.remove("active");
-document.getElementById("page3").classList.add("active");
-}
-
-function kembali2(){
-document.getElementById("page3").classList.remove("active");
-document.getElementById("page2").classList.add("active");
-}
-
 </script>
 
 </body>
-  </html>
+</html>
