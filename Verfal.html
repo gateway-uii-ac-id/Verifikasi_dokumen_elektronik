@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
 
 <meta charset="UTF-8">
@@ -34,6 +33,7 @@ font-size:13px;
 
 .container{
 width:650px;
+max-width:90%;
 margin:60px auto;
 background:white;
 padding:35px;
@@ -100,7 +100,20 @@ color:green;
 font-weight:bold;
 }
 
-/* LOADING */
+/* PAGE TRANSITION */
+
+.page{
+display:none;
+opacity:0;
+transition:opacity .4s ease;
+}
+
+.page.active{
+display:block;
+opacity:1;
+}
+
+/* LOADING SCREEN */
 
 #loading{
 position:fixed;
@@ -128,15 +141,23 @@ animation:spin 1s linear infinite;
 100%{transform:rotate(360deg)}
 }
 
-/* PAGE */
+/* VERIFY LOADING */
 
-.page{
+#verifyLoading{
 display:none;
+position:fixed;
+width:100%;
+height:100%;
+background:rgba(255,255,255,0.95);
+top:0;
+left:0;
+z-index:1000;
+align-items:center;
+justify-content:center;
+flex-direction:column;
 }
 
-.active{
-display:block;
-}
+/* FOOTER */
 
 .footer{
 text-align:center;
@@ -151,12 +172,21 @@ color:#777;
 
 <body>
 
-<!-- LOADING -->
+<!-- LOADING AWAL -->
 
 <div id="loading">
 
 <div class="spinner"></div>
 <p>Memuat Sistem Verifikasi...</p>
+
+</div>
+
+<!-- LOADING VERIFIKASI -->
+
+<div id="verifyLoading">
+
+<div class="spinner"></div>
+<p>Sedang memverifikasi dokumen...</p>
 
 </div>
 
@@ -181,7 +211,6 @@ verifikasi.uii.ac.id
 <p>Silakan masukkan identitas untuk melakukan verifikasi dokumen elektronik.</p>
 
 <input type="text" id="nama" placeholder="Masukkan Nama">
-
 <input type="text" id="nim" placeholder="Masukkan NIM">
 
 <br><br>
@@ -215,8 +244,23 @@ verifikasi.uii.ac.id
 </tr>
 
 <tr>
+<td>Nomor Induk Kependudukan</td>
+<td>347112XXXXXXXX</td>
+</tr>
+
+<tr>
 <td>Tempat / Tanggal Lahir</td>
 <td>Yogyakarta, 12 Mei 1997</td>
+</tr>
+
+<tr>
+<td>Jenis Kelamin</td>
+<td>Laki-laki</td>
+</tr>
+
+<tr>
+<td>Kewarganegaraan</td>
+<td>Indonesia</td>
 </tr>
 
 <tr>
@@ -232,6 +276,11 @@ verifikasi.uii.ac.id
 <tr>
 <td>Jenjang Pendidikan</td>
 <td>Magister (S2)</td>
+</tr>
+
+<tr>
+<td>Status Mahasiswa</td>
+<td>Lulus</td>
 </tr>
 
 <tr>
@@ -259,8 +308,33 @@ verifikasi.uii.ac.id
 </tr>
 
 <tr>
-<td>Tanggal Kelulusan</td>
-<td>28 September 2024</td>
+<td>Nomor Seri Ijazah Nasional</td>
+<td>NSIN-2024-8849201</td>
+</tr>
+
+<tr>
+<td>Nomor SK Yudisium</td>
+<td>SK/UII/MM/IX/2024/115</td>
+</tr>
+
+<tr>
+<td>Tanggal Yudisium</td>
+<td>20 September 2024</td>
+</tr>
+
+<tr>
+<td>Tanggal Penerbitan Ijazah</td>
+<td>30 September 2024</td>
+</tr>
+
+<tr>
+<td>Perguruan Tinggi</td>
+<td>Universitas Islam Indonesia</td>
+</tr>
+
+<tr>
+<td>Akreditasi Program Studi</td>
+<td>Unggul (BAN-PT)</td>
 </tr>
 
 <tr>
@@ -282,14 +356,12 @@ verifikasi.uii.ac.id
 </div>
 
 <div class="footer">
-
 © Universitas Islam Indonesia
-
 </div>
 
 <script>
 
-/* DATABASE */
+/* DATABASE SIMULASI */
 
 let db={
 
@@ -307,7 +379,7 @@ fakultas:"Fakultas Teknologi Industri"
 
 };
 
-/* LOADING */
+/* LOADING AWAL */
 
 window.onload=function(){
 
@@ -336,17 +408,28 @@ return;
 
 }
 
+/* tampilkan loading verifikasi */
+
+document.getElementById("verifyLoading").style.display="flex";
+
+setTimeout(function(){
+
+document.getElementById("verifyLoading").style.display="none";
+
 document.getElementById("v_nama").innerHTML=data.nama;
 document.getElementById("v_nim").innerHTML=nim;
 document.getElementById("v_prodi").innerHTML=data.prodi;
 document.getElementById("v_fakultas").innerHTML=data.fakultas;
 
 let tgl=new Date();
-
 document.getElementById("v_tanggal").innerHTML=tgl.toLocaleDateString("id-ID");
+
+/* transisi halaman */
 
 document.getElementById("page1").classList.remove("active");
 document.getElementById("page2").classList.add("active");
+
+},2000);
 
 }
 
